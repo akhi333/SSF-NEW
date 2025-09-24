@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Fixed Header</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 200vh; /* Make page scrollable */
+        }
+        
+        .top-contact-bar {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100% !important;
+            background: #1a1a1a !important;
+            color: white !important;
+            padding: 8px 0 !important;
+            z-index: 1001 !important;
+        }
+        
+        .fixed-header {
+            position: fixed !important;
+            top: 40px !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100vw !important;
+            background: #1e3c72 !important;
+            color: white !important;
+            padding: 10px 20px !important;
+            z-index: 9999 !important;
+        }
+        
+        .content {
+            margin-top: 120px;
+            padding: 20px;
+            background: #f0f0f0;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Contact Bar -->
+    <div class="top-contact-bar">
+        <div>+91-40-12345678 | info@starlinksecurity.com | 24/7 Emergency Service</div>
+    </div>
+
+    <!-- Fixed Navigation Header -->
+    <header class="fixed-header">
+        <div>STARLINK SECURITY FORCE - Professional Security Solutions</div>
+        <div>HOME | ABOUT US | LEADERSHIP | SERVICES | CLIENTS | RECRUITMENTS | TRAINING | GALLERY | CAREERS | CONTACT</div>
+    </header>
+
+    <!-- Content -->
+    <div class="content">
+        <h1>Test Content</h1>
+        <p>This is test content to make the page scrollable. Scroll down to see if the header stays fixed.</p>
+        <p>Line 1</p>
+        <p>Line 2</p>
+        <p>Line 3</p>
+        <p>Line 4</p>
+        <p>Line 5</p>
+        <p>Line 6</p>
+        <p>Line 7</p>
+        <p>Line 8</p>
+        <p>Line 9</p>
+        <p>Line 10</p>
+        <p>Line 11</p>
+        <p>Line 12</p>
+        <p>Line 13</p>
+        <p>Line 14</p>
+        <p>Line 15</p>
+        <p>Line 16</p>
+        <p>Line 17</p>
+        <p>Line 18</p>
+        <p>Line 19</p>
+        <p>Line 20</p>
+    </div>
+</body>
+</html>

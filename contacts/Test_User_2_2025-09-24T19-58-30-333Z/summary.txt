@@ -1,0 +1,11 @@
+Contact Inquiry Summary
+========================
+
+Contact Name: Test User 2
+Email: test2@example.com
+Phone: 987-654-3210
+Inquiry Type: Training Program Inquiry
+Submission Date: 2025-09-24T20:00:00.000Z
+
+Message:
+Test message 2

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .chakra-rotation {
+        animation: rotateClockwise 3s linear infinite;
+        transform-origin: 100px 100px;
+      }
+      .eagle-fly {
+        animation: flyEagle 2s ease-in-out infinite;
+        transform-origin: 100px 100px;
+      }
+      @keyframes rotateClockwise {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      @keyframes flyEagle {
+        0%, 100% { transform: translateY(0px) scale(1); }
+        25% { transform: translateY(-3px) scale(1.05); }
+        50% { transform: translateY(-5px) scale(1.1); }
+        75% { transform: translateY(-3px) scale(1.05); }
+      }
+    </style>
+  </defs>
+  
+  <!-- Outer Ring -->
+  <circle cx="100" cy="100" r="95" fill="none" stroke="#1e3c72" stroke-width="8"/>
+  <circle cx="100" cy="100" r="95" fill="none" stroke="white" stroke-width="2"/>
+  
+  <!-- Company Name -->
+  <text x="100" y="30" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">STARLINK SECURITY FORCE</text>
+  
+  <!-- Motto -->
+  <text x="100" y="180" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Eyes in the sky, shield on the ground</text>
+  
+  <!-- Chakra (Golden Ring) -->
+  <g class="chakra-rotation">
+    <circle cx="100" cy="100" r="70" fill="none" stroke="#ffd700" stroke-width="6"/>
+    <circle cx="100" cy="100" r="70" fill="none" stroke="white" stroke-width="1"/>
+    <!-- Chakra patterns -->
+    <circle cx="100" cy="100" r="60" fill="none" stroke="#ffd700" stroke-width="2" opacity="0.7"/>
+    <circle cx="100" cy="100" r="50" fill="none" stroke="#ffd700" stroke-width="1" opacity="0.5"/>
+    <!-- Decorative elements -->
+    <g stroke="#ffd700" stroke-width="2" fill="none">
+      <path d="M 100 30 L 100 50 M 100 150 L 100 170"/>
+      <path d="M 30 100 L 50 100 M 150 100 L 170 100"/>
+      <path d="M 45 45 L 60 60 M 140 140 L 155 155"/>
+      <path d="M 155 45 L 140 60 M 60 140 L 45 155"/>
+    </g>
+  </g>
+  
+  <!-- Eagle (Flying) -->
+  <g class="eagle-fly">
+    <!-- Eagle body -->
+    <ellipse cx="100" cy="100" rx="15" ry="25" fill="#2c3e50" stroke="white" stroke-width="1"/>
+    <!-- Eagle head -->
+    <circle cx="100" cy="85" r="8" fill="#2c3e50" stroke="white" stroke-width="1"/>
+    <!-- Eagle beak -->
+    <polygon points="100,85 95,80 105,80" fill="#ffd700"/>
+    <!-- Eagle wings -->
+    <ellipse cx="85" cy="95" rx="20" ry="8" fill="#34495e" stroke="white" stroke-width="1" transform="rotate(-20 85 95)"/>
+    <ellipse cx="115" cy="95" rx="20" ry="8" fill="#34495e" stroke="white" stroke-width="1" transform="rotate(20 115 95)"/>
+    <!-- Eagle tail -->
+    <ellipse cx="100" cy="120" rx="12" ry="6" fill="#2c3e50" stroke="white" stroke-width="1"/>
+  </g>
+  
+  <!-- Shield -->
+  <g>
+    <path d="M 100 60 L 120 80 L 120 120 L 100 140 L 80 120 L 80 80 Z" fill="none" stroke="#1e3c72" stroke-width="3"/>
+    <path d="M 100 60 L 120 80 L 120 120 L 100 140 L 80 120 L 80 80 Z" fill="none" stroke="white" stroke-width="1"/>
+  </g>
+  
+  <!-- Satellite Dish -->
+  <g>
+    <ellipse cx="100" cy="70" rx="8" ry="4" fill="#bdc3c7" stroke="white" stroke-width="1"/>
+    <line x1="100" y1="70" x2="100" y2="60" stroke="#ffd700" stroke-width="2"/>
+    <circle cx="100" cy="60" r="2" fill="#ffd700"/>
+  </g>
+  
+  <!-- Stars -->
+  <g fill="white">
+    <polygon points="50,30 52,36 58,36 53,40 55,46 50,42 45,46 47,40 42,36 48,36"/>
+    <polygon points="150,30 152,36 158,36 153,40 155,46 150,42 145,46 147,40 142,36 148,36"/>
+  </g>
+</svg>
