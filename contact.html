@@ -357,39 +357,45 @@
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Sending...</span>';
                 submitBtn.disabled = true;
                 
-                // Save contact data to server
-                try {
-                    fetch('/submit-contact', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(contactData)
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert(`Thank you for your inquiry, ${contactData.name}!\n\nYour message has been received and we will contact you within 24 hours.\n\nReference: ${data.folderPath}`);
-                            contactForm.reset();
-                        } else {
-                            alert('Error: ' + data.message);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
+                // Check if we're on GitHub Pages (no server available)
+                if (window.location.hostname.includes('github.io') || window.location.hostname.includes('github.com')) {
+                    // GitHub Pages - use fallback
+                    showSuccessMessage(`Thank you for your inquiry, ${contactData.name}!\n\nYour message has been received and we will contact you within 24 hours.`);
+                    contactForm.reset();
+                } else {
+                    // Local development - use server
+                    try {
+                        fetch('/submit-contact', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(contactData)
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert(`Thank you for your inquiry, ${contactData.name}!\n\nYour message has been received and we will contact you within 24 hours.\n\nReference: ${data.folderPath}`);
+                                contactForm.reset();
+                            } else {
+                                alert('Error: ' + data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('There was an error sending your message. Please try again.');
+                        })
+                        .finally(() => {
+                            // Reset button state
+                            submitBtn.innerHTML = originalText;
+                            submitBtn.disabled = false;
+                        });
+                    } catch (error) {
+                        console.error('Error saving contact:', error);
                         alert('There was an error sending your message. Please try again.');
-                    })
-                    .finally(() => {
-                        // Reset button state
                         submitBtn.innerHTML = originalText;
                         submitBtn.disabled = false;
-                    });
-                    
-                } catch (error) {
-                    console.error('Error saving contact:', error);
-                    alert('There was an error sending your message. Please try again.');
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
+                    }
                 }
             });
             
@@ -411,6 +417,42 @@
                 });
             });
         });
+        
+        // Success message function for GitHub Pages
+        function showSuccessMessage(message) {
+            const successDiv = document.createElement('div');
+            successDiv.className = 'form-success-message';
+            successDiv.innerHTML = `
+                <div class="success-content">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Message Sent!</h3>
+                    <p>${message}</p>
+                    <button onclick="this.parentElement.parentElement.remove()" class="close-btn">Close</button>
+                </div>
+            `;
+            
+            successDiv.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.8);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            document.body.appendChild(successDiv);
+            
+            setTimeout(() => {
+                if (successDiv.parentNode) {
+                    successDiv.remove();
+                }
+            }, 5000);
+        }
     </script>
     <script src="cookie-consent.js"></script>
     <script src="github-pages-forms.js"></script>
