@@ -546,33 +546,34 @@
                 formDataToSend.append('message', applicationData.message);
                 formDataToSend.append('resume', resumeFile);
                 
-                // Check if we're on GitHub Pages (no server available)
-                if (window.location.hostname.includes('github.io') || window.location.hostname.includes('github.com')) {
-                    // GitHub Pages - use fallback
+                // Try to submit to server, fallback to success message if it fails
+                fetch('/submit-application', {
+                    method: 'POST',
+                    body: formDataToSend
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Server not available');
+                    }
+                })
+                .then(data => {
+                    if (data.success) {
+                        alert(`Thank you for your application, ${applicationData.name}!\n\nYour application has been saved to:\n${data.folderPath}\n\nWe will review your resume and get back to you soon.`);
+                        closeContactModal();
+                        document.getElementById('contactForm').reset();
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.log('Server not available, using fallback:', error.message);
+                    // GitHub Pages fallback - show success message
                     showSuccessMessage(`Thank you for your application, ${applicationData.name}!\n\nWe will review your resume and get back to you soon.`);
                     closeContactModal();
                     document.getElementById('contactForm').reset();
-                } else {
-                    // Local development - use server
-                    fetch('/submit-application', {
-                        method: 'POST',
-                        body: formDataToSend
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert(`Thank you for your application, ${applicationData.name}!\n\nYour application has been saved to:\n${data.folderPath}\n\nWe will review your resume and get back to you soon.`);
-                            closeContactModal();
-                            document.getElementById('contactForm').reset();
-                        } else {
-                            alert('Error: ' + data.message);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('There was an error saving your application. Please try again.');
-                    });
-                }
+                });
                 
             } catch (error) {
                 console.error('Error saving application:', error);

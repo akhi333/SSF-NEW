@@ -18,6 +18,8 @@ const totalClientSlides = clientSlides.length;
 
 // Auto-slide functionality
 function showSlide(n) {
+    if (!slides || slides.length === 0 || !dots || dots.length === 0) return;
+    
     // Hide all slides
     slides.forEach(slide => slide.classList.remove('active'));
     dots.forEach(dot => dot.classList.remove('active'));
@@ -26,8 +28,8 @@ function showSlide(n) {
     if (n >= totalSlides) currentSlide = 0;
     if (n < 0) currentSlide = totalSlides - 1;
     
-    slides[currentSlide].classList.add('active');
-    dots[currentSlide].classList.add('active');
+    if (slides[currentSlide]) slides[currentSlide].classList.add('active');
+    if (dots[currentSlide]) dots[currentSlide].classList.add('active');
 }
 
 function changeSlide(n) {
@@ -42,20 +44,24 @@ function currentSlideFunc(n) {
 
 // Auto-advance slides every 3 seconds
 setInterval(() => {
-    currentSlide++;
-    showSlide(currentSlide);
+    if (slides && slides.length > 0) {
+        currentSlide++;
+        showSlide(currentSlide);
+    }
 }, 3000);
 
 // Testimonials functionality
 function showTestimonial(n) {
+    if (!testimonials || testimonials.length === 0 || !testimonialDots || testimonialDots.length === 0) return;
+    
     testimonials.forEach(testimonial => testimonial.classList.remove('active'));
     testimonialDots.forEach(dot => dot.classList.remove('active'));
     
     if (n >= totalTestimonials) currentTestimonialSlide = 0;
     if (n < 0) currentTestimonialSlide = totalTestimonials - 1;
     
-    testimonials[currentTestimonialSlide].classList.add('active');
-    testimonialDots[currentTestimonialSlide].classList.add('active');
+    if (testimonials[currentTestimonialSlide]) testimonials[currentTestimonialSlide].classList.add('active');
+    if (testimonialDots[currentTestimonialSlide]) testimonialDots[currentTestimonialSlide].classList.add('active');
 }
 
 function currentTestimonial(n) {
@@ -65,8 +71,10 @@ function currentTestimonial(n) {
 
 // Auto-advance testimonials every 5 seconds
 setInterval(() => {
-    currentTestimonialSlide++;
-    showTestimonial(currentTestimonialSlide);
+    if (testimonials && testimonials.length > 0) {
+        currentTestimonialSlide++;
+        showTestimonial(currentTestimonialSlide);
+    }
 }, 5000);
 
 // Mobile Clients Carousel Functions

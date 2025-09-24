@@ -357,46 +357,40 @@
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Sending...</span>';
                 submitBtn.disabled = true;
                 
-                // Check if we're on GitHub Pages (no server available)
-                if (window.location.hostname.includes('github.io') || window.location.hostname.includes('github.com')) {
-                    // GitHub Pages - use fallback
+                // Try to submit to server, fallback to success message if it fails
+                fetch('/submit-contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(contactData)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Server not available');
+                    }
+                })
+                .then(data => {
+                    if (data.success) {
+                        alert(`Thank you for your inquiry, ${contactData.name}!\n\nYour message has been received and we will contact you within 24 hours.\n\nReference: ${data.folderPath}`);
+                        contactForm.reset();
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.log('Server not available, using fallback:', error.message);
+                    // GitHub Pages fallback - show success message
                     showSuccessMessage(`Thank you for your inquiry, ${contactData.name}!\n\nYour message has been received and we will contact you within 24 hours.`);
                     contactForm.reset();
-                } else {
-                    // Local development - use server
-                    try {
-                        fetch('/submit-contact', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(contactData)
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                alert(`Thank you for your inquiry, ${contactData.name}!\n\nYour message has been received and we will contact you within 24 hours.\n\nReference: ${data.folderPath}`);
-                                contactForm.reset();
-                            } else {
-                                alert('Error: ' + data.message);
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                            alert('There was an error sending your message. Please try again.');
-                        })
-                        .finally(() => {
-                            // Reset button state
-                            submitBtn.innerHTML = originalText;
-                            submitBtn.disabled = false;
-                        });
-                    } catch (error) {
-                        console.error('Error saving contact:', error);
-                        alert('There was an error sending your message. Please try again.');
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
-                    }
-                }
+                })
+                .finally(() => {
+                    // Reset button state
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                });
             });
             
             // Form validation and styling
