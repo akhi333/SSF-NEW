@@ -159,6 +159,7 @@ body {
     background-color: white;
     position: relative;
     transition: all 0.3s ease;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3);
 }
 
 .navbar-toggler-icon::before,
@@ -2547,23 +2548,31 @@ section h2 {
     }
     
     .top-contact-bar {
-        padding: 6px 0;
-        font-size: 12px;
+        padding: 8px 0;
+        font-size: 14px;
     }
     
     .top-contact-bar .container {
-        flex-direction: column;
-        gap: 8px;
-        text-align: center;
+        flex-direction: row;
+        gap: 10px;
+        text-align: left;
+        justify-content: space-between;
     }
     
     .top-contact-bar .contact-info {
         flex-direction: column;
-        gap: 5px;
+        gap: 3px;
+        flex: 1;
+    }
+    
+    .top-contact-bar .contact-info span {
+        font-size: 12px;
+        white-space: nowrap;
     }
     
     .top-contact-bar .social-links {
-        justify-content: center;
+        justify-content: flex-end;
+        gap: 8px;
     }
     
     .fixed-header {
@@ -2579,8 +2588,12 @@ section h2 {
     /* Show hamburger menu on mobile */
     .navbar-toggler {
         display: block !important;
-        background-color: rgba(255, 255, 255, 0.2) !important;
-        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        background-color: rgba(255, 255, 255, 0.3) !important;
+        border: 2px solid rgba(255, 255, 255, 0.5) !important;
+        border-radius: 4px !important;
+        padding: 10px !important;
+        min-width: 44px !important;
+        min-height: 44px !important;
     }
     
     .company-name h1 {
@@ -2689,28 +2702,31 @@ section h2 {
     }
     
     .top-contact-bar {
-        padding: 5px 0;
-        font-size: 11px;
+        padding: 6px 0;
+        font-size: 12px;
     }
     
     .top-contact-bar .container {
-        flex-direction: column;
-        gap: 5px;
-        text-align: center;
+        flex-direction: row;
+        gap: 8px;
+        text-align: left;
+        justify-content: space-between;
     }
     
     .top-contact-bar .contact-info {
         flex-direction: column;
-        gap: 3px;
+        gap: 2px;
+        flex: 1;
     }
     
     .top-contact-bar .contact-info span {
-        font-size: 0.8rem;
+        font-size: 10px;
+        white-space: nowrap;
     }
     
     .top-contact-bar .social-links {
-        justify-content: center;
-        gap: 10px;
+        justify-content: flex-end;
+        gap: 6px;
     }
     
     .fixed-header {
