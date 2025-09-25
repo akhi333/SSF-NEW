@@ -121,6 +121,20 @@ body {
     width: 100%;
 }
 
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+}
+
 .logo {
     display: flex;
     align-items: center;
@@ -140,18 +154,15 @@ body {
 
 /* Mobile Menu Toggle Button */
 .navbar-toggler {
-    display: block; /* Temporarily show on all devices for debugging */
+    display: none; /* Hidden by default, shown on mobile */
     background: none;
     border: none;
     cursor: pointer;
     padding: 8px;
     z-index: 10000;
     position: relative;
-    /* Debug: Make sure it's visible when shown */
-    background-color: rgba(255, 255, 255, 0.3);
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    border-radius: 4px;
 }
+
 
 .navbar-toggler-icon {
     display: block;
@@ -2584,7 +2595,59 @@ section h2 {
     .nav-container {
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
         padding: 10px 15px;
+        position: relative;
+    }
+    
+    .nav-left {
+        flex: 1;
+        gap: 10px;
+    }
+    
+    .nav-right {
+        gap: 10px;
+    }
+    
+    /* Hide main navigation on mobile by default */
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        z-index: 1000;
+        min-width: 200px;
+        border-radius: 0 0 8px 8px;
+    }
+    
+    .main-nav.show {
+        display: block;
+    }
+    
+    .main-nav ul {
+        flex-direction: column;
+        padding: 15px 0;
+        gap: 0;
+    }
+    
+    .main-nav li {
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .main-nav li:last-child {
+        border-bottom: none;
+    }
+    
+    .main-nav .nav-link {
+        display: block;
+        padding: 12px 20px;
+        text-align: left;
+        border-radius: 0;
+        width: 100%;
+        font-size: 14px;
     }
     
     /* Show hamburger menu on mobile */
@@ -2598,6 +2661,7 @@ section h2 {
         min-height: 44px !important;
     }
     
+    
     .company-name h1 {
         font-size: 1.5rem;
     }
@@ -2606,26 +2670,6 @@ section h2 {
         font-size: 0.9rem;
     }
     
-    /* Hide navigation by default on mobile */
-    .main-nav {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        transform: translateY(-100%);
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 1002;
-    }
-    
-    .main-nav.show {
-        transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
-    }
     
     .main-nav ul {
         flex-direction: column;
@@ -2738,12 +2782,70 @@ section h2 {
     .nav-container {
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
         padding: 8px 10px;
+        position: relative;
+    }
+    
+    .nav-left {
+        flex: 1;
+        gap: 8px;
+    }
+    
+    .nav-right {
+        gap: 8px;
+    }
+    
+    /* Hide main navigation on mobile by default */
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        z-index: 1000;
+        min-width: 200px;
+        border-radius: 0 0 8px 8px;
+    }
+    
+    .main-nav.show {
+        display: block;
+    }
+    
+    .main-nav ul {
+        flex-direction: column;
+        padding: 10px 0;
+        gap: 0;
+    }
+    
+    .main-nav li {
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .main-nav li:last-child {
+        border-bottom: none;
+    }
+    
+    .main-nav .nav-link {
+        display: block;
+        padding: 10px 15px;
+        text-align: left;
+        border-radius: 0;
+        width: 100%;
+        font-size: 13px;
     }
     
     /* Show hamburger menu on mobile */
     .navbar-toggler {
-        display: block;
+        display: block !important;
+        background-color: rgba(255, 255, 255, 0.3) !important;
+        border: 2px solid rgba(255, 255, 255, 0.5) !important;
+        border-radius: 4px !important;
+        padding: 8px !important;
+        min-width: 40px !important;
+        min-height: 40px !important;
     }
     
     .company-name h1 {
@@ -2755,26 +2857,6 @@ section h2 {
         font-size: 0.8rem;
     }
     
-    /* Hide navigation by default on mobile */
-    .main-nav {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        transform: translateY(-100%);
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 1002;
-    }
-    
-    .main-nav.show {
-        transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
-    }
     
     .main-nav ul {
         flex-direction: column;
